@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE library SYSTEM "library_default.dtd">
+<library xmlns="http://khi.be/ns/library">
+	<book added_at="2011/07/15 15:02">
+		<isbn>0-596-00197-5</isbn>
+		<title>Java &amp; XML</title>
+		<author>
+			<firstname>Brett</firstname>
+			<lastname>McLaughlin</lastname>
+		</author>
+		<publisher>O'Reilly</publisher>
+		<edition>2nd</edition>
+	</book>
+	<book added_at="2011/07/15 15:03">
+		<isbn>0-596-00292-0</isbn>
+		<title>XML in a Nutshell</title>
+		<author>
+			<firstname>Elliotte</firstname>
+			<lastname>Rusty Harold</lastname>
+		</author>
+		<author>
+			<firstname>Scott</firstname>
+			<lastname>Means</lastname>
+		</author>
+		<publisher>O'Reilly</publisher>
+		<edition>2nd</edition>
+	</book>
+</library>

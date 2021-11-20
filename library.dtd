@@ -1,0 +1,43 @@
+<!--
+Do not omit this step and try to use the dc-prefix and dc-colon parameter entities directly in ELEMENT and ATTLIST declarations. This will fail because XML parsers add extra space around the entity's replacement text when they're used outside another entity's replacement text.
+-->
+
+<!--
+Excerpt from Effective XML, Item 7.
+When parameterizing namespace prefixes, it is essential that you do not skip any steps. In particular, you muste use the double indirection of defining entity references for both the element's qualified name and for its local name and prefix. Do not try something like this:
+<!ELEMENT %statement.prefix;%statement.colon;Number (%Number.content;)>
+For various technical reasons, this will fail. In brief, without the double indirection the parser adds extra space around the resolved entities so that the resolved declaration is malformed.
+-->
+
+<!ENTITY % library.prefix "library">
+<!ENTITY % library.colon ":">
+
+<!ENTITY % library.qname "%library.prefix;%library.colon;library">
+<!ENTITY % book.qname "%library.prefix;%library.colon;book">
+<!ENTITY % isbn.qname "%library.prefix;%library.colon;isbn">
+<!ENTITY % title.qname "%library.prefix;%library.colon;title">
+<!ENTITY % firstname.qname "%library.prefix;%library.colon;firstname">
+<!ENTITY % lastname.qname "%library.prefix;%library.colon;lastname">
+<!ENTITY % publisher.qname "%library.prefix;%library.colon;publisher">
+<!ENTITY % edition.qname "%library.prefix;%library.colon;edition">
+<!ENTITY % author.qname "%library.prefix;%library.colon;author">
+
+<!ENTITY % author.content " %firstname.qname;, %lastname.qname; ">
+<!ENTITY % book.content "%isbn.qname;, %title.qname;, %author.qname;+, %publisher.qname;, %edition.qname; ">
+<!ENTITY % library.content "%book.qname;*">
+
+<!ELEMENT %isbn.qname; (#PCDATA)>
+<!ELEMENT %title.qname; (#PCDATA)>
+<!ELEMENT %firstname.qname; (#PCDATA)>
+<!ELEMENT %lastname.qname; (#PCDATA)>
+<!ELEMENT %publisher.qname; (#PCDATA)>
+<!ELEMENT %edition.qname; (#PCDATA)>
+<!ELEMENT %author.qname; (%author.content;)>
+<!ELEMENT %book.qname; (%book.content;)>
+<!ELEMENT %library.qname; (%library.content;)>
+
+<!ATTLIST %book.qname; added_at CDATA #IMPLIED>
+
+<!ENTITY % xmlns "xmlns:%library.prefix;">
+<!ATTLIST %library.qname; %xmlns; CDATA #FIXED "http://khi.be/ns/library">
+	
